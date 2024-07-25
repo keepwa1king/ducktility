@@ -1,0 +1,15 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* html 요소에 필요한 기본 스타일을 base 수준으로 레이어에 추가 */
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Pretendard Variable", sans-serif;
+  }
+}
