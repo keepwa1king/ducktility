@@ -6,7 +6,7 @@ interface ContentLayoutProps {
 }
 
 export default function ContentLayout(props: ContentLayoutProps) {
-  const className = `h-dvh w-full ${props.backgroundColor ?? "bg-white"}`;
+  const className = `min-h-dvh w-full ${props.backgroundColor ?? "bg-white"}`;
 
   return <div class={className}>{props.children}</div>;
 }
