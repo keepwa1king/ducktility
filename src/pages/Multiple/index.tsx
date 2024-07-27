@@ -72,7 +72,7 @@ const Multiple: Component = () => {
         <div class="flex flex-col justify-center px-5 py-7">
           <div class="flex flex-col items-center">
             <MultipleForm />
-            {state.users.length < 6 && state.questions.every((q) => q !== "") && (
+            {state.users.length < 7 && state.questions.every((q) => q !== "") && (
               <button
                 onClick={addUser}
                 class="flex items-center justify-center rounded bg-ourBlue px-[10px] py-[5.5px] text-white"

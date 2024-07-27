@@ -66,7 +66,7 @@ export default function UserForm(props: UserFormProps) {
           <img src={edit} alt="icon" class="h-4 w-4" />
         </div>
       </div>
-      <div class="mt-6 grid grid-cols-4 gap-4">
+      <div class="mt-6 grid grid-cols-4 gap-3">
         <For each={props.questions}>
           {(_, index) => {
             const uuid = createUniqueId();
@@ -74,7 +74,7 @@ export default function UserForm(props: UserFormProps) {
               <div class="flex w-full flex-col text-center">
                 <MultipleButton userIndex={props.userIndex} index={index()} user={user()} uid={uuid} />
                 <div class="size-2"></div>
-                <div class="w-full text-center text-body3 font-semibold tracking-body3 text-grey-800">
+                <div class="break-words px-1 w-full text-center items-center text-body2 font-semibold tracking-body2 text-grey-800">
                   {props.questions[index()] || `${index() + 1}번째 문항`}
                 </div>
               </div>

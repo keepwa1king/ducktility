@@ -13,7 +13,7 @@ const MultipleResult: Component = () => {
   let canvasRef: HTMLCanvasElement | undefined;
   const navigate = useNavigate();
 
-  createEffect(() => {
+  onMount(() => {
     if (!canvasRef) return;
 
     const canvas = canvasRef;
@@ -24,79 +24,128 @@ const MultipleResult: Component = () => {
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const drawStyle = () => {
-      state.users.forEach((user, userIndex) => {
-        if (!user.profileImage || !user.name) return;
+    const loadImage = (src: string): Promise<HTMLImageElement> => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+        img.crossOrigin = "anonymous";
+      });
+    };
 
-        const userImage = new Image();
-        userImage.src = user.profileImage;
+    const wrapText = (context: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number, maxLines: number) => {
+      let lines = [];
+      let line = '';
+      let lineCount = 0;
 
-        const x = 100;
-        const y = 100 + (100 + 40) * userIndex + 25;
-        const radius = 45;
+      for (let i = 0; i < text.length; i++) {
+        let testLine = line + text[i];
+        let metrics = context.measureText(testLine);
+        let testWidth = metrics.width;
 
-        ctx.save();
-        // 현재 컨텍스트 설정 저장
-
-        // 클리핑 영역을 원으로 설정
-        ctx.beginPath();
-        ctx.arc(x, y + 20, radius, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.clip();
-
-        // 원 안에 이미지 그리기
-        const imageSize = Math.min(userImage.width, userImage.height); // 이미지의 크기 중에서 작은 값을 기준으로 정사각형 크기 설정
-        const sourceX = (userImage.width - imageSize) / 2; // 이미지의 중앙에서 크롭할 위치 계산
-        const sourceY = (userImage.height - imageSize) / 2;
-        const sourceSize = imageSize;
-
-        ctx.drawImage(
-          userImage,
-          sourceX,
-          sourceY,
-          sourceSize,
-          sourceSize,
-          x - radius,
-          y + 20 - radius,
-          radius * 2,
-          radius * 2
-        );
-
-        ctx.restore(); // 이전 컨텍스트 설정으로 복원
-
-        const userAnswers = user.answers;
-
-        const answerTextY = y - radius;
-        const answerTextX = x + radius + 160;
-
-        // 이미지 너비와 높이 설정
-        const imageWidth = 120; // 이미지 너비
-        const imageHeight = 120; // 이미지 높이
-
-        // 이미지 간격 설정
-        const imageSpacingY = 0; // Y축 간격
-
-        userAnswers.forEach((answer, answerIndex) => {
-          if (!answer.profileImage) return;
-          const textX = answerTextX + answerIndex * imageWidth;
-          const textY = answerTextY;
-          if (userIndex === 0) {
-            ctx.font = "500 30px Pretendard Variable";
-            ctx.fillText(state.questions[answerIndex], textX, textY - 10);
+        if (testWidth > maxWidth && i > 0) {
+          if (lineCount === maxLines - 1) {
+            lines.push(line.slice(0, -3) + '...');
+            break;
           }
+          lines.push(line);
+          line = text[i];
+          lineCount++;
+        } else {
+          line = testLine;
+        }
 
-          const imageX = textX - 60;
-          const imageY = answerTextY + imageSpacingY + 20;
+        if (i === text.length - 1) {
+          lines.push(line);
+        }
+      }
 
-          const answerImage = new Image();
-          answerImage.crossOrigin = "anonymous";
-          answerImage.src = answer.profileImage;
+      if (lines.length > maxLines) {
+        lines = lines.slice(0, maxLines);
+        lines[maxLines - 1] = lines[maxLines - 1].slice(0, -3) + '...';
+      }
 
-          answerImage.onload = () => {
-            ctx.drawImage(answerImage, imageX, imageY, imageWidth, imageHeight);
-          };
+      if(lines.length > 1) {
+        for (let i = 0; i < lines.length; i++) {
+          context.fillText(lines[i], x, y + 7 + (i * lineHeight));
+        }
+      } else {
+        context.fillText(lines[0], x, y + (1 * lineHeight));
+      }
+    };
+
+    const drawImageCovered = (ctx: CanvasRenderingContext2D, img: HTMLImageElement, x: number, y: number, w: number, h: number) => {
+      const aspectRatio = img.width / img.height;
+      let sx, sy, sWidth, sHeight;
+
+      if (aspectRatio > 1) {
+        sWidth = img.height;
+        sHeight = img.height;
+        sx = (img.width - sWidth) / 2;
+        sy = 0;
+      } else {
+        sWidth = img.width;
+        sHeight = img.width;
+        sx = 0;
+        sy = (img.height - sHeight) / 2;
+      }
+
+      ctx.drawImage(img, sx, sy, sWidth, sHeight, x, y, w, h);
+    };
+
+
+    const drawStyle = async () => {
+      const questionSize = 115;
+      const answerSize = 115;
+      const userImageSize = 80;
+      const spacing = 0;
+
+      // Draw questions
+      ctx.font = "600 16px Pretendard Variable";
+      ctx.fillStyle = "black";
+      ctx.textAlign = "center";
+      state.questions.forEach((question, index) => {
+        const x = 225 + index * (questionSize + spacing) + questionSize / 2;
+        const y = 40;
+        wrapText(ctx, question, x, y, questionSize, 18, 3);
+      });
+
+      const userImagePromises = [...state.users, ...state.users, ...state.users, ...state.users,  ...state.users, ...state.users, ...state.users].map((user, userIndex) => {
+        if (!user.profileImage || !user.name) return null;
+        return loadImage(user.profileImage).then(userImage => {
+          const x = 100;
+          const y = 100 + (userImageSize + 35) * userIndex;
+
+          // Draw user image
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(x, y + 5 + userImageSize / 2 , userImageSize / 2, 0, Math.PI * 2);
+          ctx.closePath();
+          ctx.clip();
+          drawImageCovered(ctx, userImage, x - userImageSize / 2, y + 5, userImageSize, userImageSize);
+          ctx.restore();
+
+          // Draw username
+          ctx.fillStyle = "black";
+          ctx.textAlign = "center";
+          ctx.font = "500 16px Pretendard Variable";
+          ctx.fillText(user.name, x, y + userImageSize + 30);
+
+          const answerPromises = user.answers.map((answer, answerIndex) => {
+            if (!answer.profileImage) return null;
+            return loadImage(answer.profileImage).then(answerImage => {
+              const imageX = 225 + answerIndex * (answerSize + spacing);
+              const imageY = y;
+              drawImageCovered(ctx, answerImage, imageX, imageY, answerSize, answerSize);
+            });
+          });
+
+          return Promise.all(answerPromises);
         });
       });
+
+      await Promise.all(userImagePromises);
     };
 
     drawStyle();
@@ -147,27 +196,29 @@ const MultipleResult: Component = () => {
   };
 
   return (
-    <ContentLayout backgroundColor="bg-white">
-      <div class="flex h-full min-h-dvh w-full flex-col items-start justify-start pb-16">
-        <div class="flex w-full flex-col bg-white">
-          <div class="flex w-full flex-row items-center justify-between bg-white px-4 pb-5 pt-14 text-center">
-            <img src={exit} alt="" class="h-6 w-6 opacity-0" />
-            <Typography variant="body4" textColor="text-black">
-              취향표 저장
-            </Typography>
-            <button onClick={() => handleExit()}>
-              <img src={exit} alt="back button" class="h-6 w-6" />
-            </button>
+    <div>
+      <ContentLayout backgroundColor="bg-white">
+        <div class="flex h-full min-h-full w-full flex-col items-start justify-start pb-16">
+          <div class="flex w-full flex-col bg-white">
+            <div class="flex w-full flex-row items-center justify-between bg-white px-4 pb-5 pt-14 text-center">
+              <img src={exit} alt="" class="h-6 w-6 opacity-0" />
+              <Typography variant="body4" textColor="text-black">
+                취향표 저장
+              </Typography>
+              <button onClick={() => handleExit()}>
+                <img src={exit} alt="back button" class="h-6 w-6" />
+              </button>
+            </div>
+            <div class="h-1 w-full bg-grey-50"></div>
           </div>
-          <div class="h-1 w-full bg-grey-50"></div>
+          <div class="size-7"></div>
+          <canvas ref={canvasRef} width={1400} height={1000} class="w-full bg-white" />
         </div>
-        <div class="size-7"></div>
-        <canvas ref={canvasRef} width={1400} height={1000} class="w-full bg-white" />
-        <Button variant="point" onClick={saveAsImage}>
-          다운로드
-        </Button>
-      </div>
-    </ContentLayout>
+      </ContentLayout>
+      <Button variant="point" onClick={saveAsImage}>
+        다운로드
+      </Button>
+    </div>
   );
 };
 

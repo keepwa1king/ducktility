@@ -15,13 +15,13 @@ export default function TextInput(props: TextInputProps) {
 
   createEffect(() => {
     setLocalValue(props.value);
-    console.log(`Effect: props.value changed to ${props.value}`);
+    // console.log(`Effect: props.value changed to ${props.value}`);
   });
 
   onMount(() => {
     if (inputRef) {
       inputRef.value = props.value;
-      console.log(`Mounted: inputRef value set to ${props.value}`);
+      // console.log(`Mounted: inputRef value set to ${props.value}`);
     }
   });
 

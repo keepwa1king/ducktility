@@ -58,7 +58,12 @@ const Home: Component = () => {
                     name: "",
                     profileImage: null,
                     answers: Array(9).fill({ profileImage: "" })
-                  }
+                  },
+                  {
+                    name: "",
+                    profileImage: null,
+                    answers: Array(9).fill({ profileImage: "" })
+                  },
                 ]
               });
             }}
@@ -66,7 +71,7 @@ const Home: Component = () => {
         </div>
         <div class="size-12"></div>
         <Typography variant="caption2" textColor="text-grey-600">
-          <a href="/request">추가요청이 있다면 알려주세요!</a>
+          <a href="https://forms.gle/1sr9gBPbDn9QFcw48">건의사항이 있다면 알려주세요!</a>
         </Typography>
         <div class="size-4"></div>
         <Typography variant="caption1" textColor="text-grey-600">
