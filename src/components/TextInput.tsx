@@ -50,7 +50,7 @@ export default function TextInput(props: TextInputProps) {
   };
 
   return (
-    <div class="w-full flex flex-row justify-between items-center rounded-[4px] bg-grey-50 px-3 py-[6px]">
+    <div class="flex flex-row justify-between items-center rounded-[4px] bg-grey-50 px-3 py-[6px]">
       <input
         size={15}
         type="text"
