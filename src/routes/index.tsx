@@ -10,7 +10,7 @@ import MultipleResult from "../pages/MultipleResult";
 const App = (props: RouteSectionProps<unknown>) => {
   return (
     <BaseLayout>
-      <div class="h-full min-h-dvh w-full bg-stone-100">{props.children}</div>
+      <div class="h-full min-h-dvh w-full bg-white">{props.children}</div>
     </BaseLayout>
   );
 };
