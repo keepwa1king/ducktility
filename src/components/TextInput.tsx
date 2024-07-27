@@ -50,9 +50,9 @@ export default function TextInput(props: TextInputProps) {
   };
 
   return (
-    <div class="flex flex-row justify-between items-center rounded-[4px] bg-grey-50 px-3 py-[6px]">
+    <div class="flex flex-row items-center justify-between rounded-[4px] bg-grey-50 px-2 py-[6px]">
       <input
-        size={15}
+        size={10}
         type="text"
         ref={inputRef}
         value={localValue()}

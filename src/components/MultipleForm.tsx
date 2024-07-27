@@ -21,7 +21,7 @@ export default function MultipleForm() {
         취향표 문항을 입력해 주세요
         <br />
       </Typography>
-      <div class="grid w-full grid-cols-2 gap-1">
+      <div class="grid grid-cols-2 gap-1">
         <For each={state.questions}>
           {(question, index) => (
             <TextInput index={index()} value={question} onChange={(value) => updateQuestion(index(), value)} exampleText={exampleTexts[index()]} />
