@@ -92,8 +92,7 @@ const Result: Component = () => {
   };
 
   return (
-    <ContentLayout backgroundColor="bg-white">
-      <div class="flex h-full min-h-dvh w-full flex-col items-start justify-start pb-16">
+      <div class="bg-white flex h-full min-h-screen w-full flex-col items-start justify-start pb-16">
         <div class="flex w-full flex-col bg-white">
           <div class="flex w-full flex-row items-center justify-between bg-white px-4 pb-5 pt-14 text-center">
             <img src={exit} alt="" class="h-6 w-6 opacity-0" />
@@ -133,7 +132,6 @@ const Result: Component = () => {
           다운로드
         </Button>
       </div>
-    </ContentLayout>
   );
 };
 

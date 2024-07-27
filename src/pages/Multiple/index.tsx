@@ -59,8 +59,7 @@ const Multiple: Component = () => {
   };
 
   return (
-    <ContentLayout backgroundColor="bg-white">
-      <div class="flex h-full min-h-dvh w-full flex-col items-start justify-start pb-24">
+      <div class="flex h-full min-h-screen bg-white w-full flex-col items-start justify-start pb-24">
         <div class="flex w-full flex-col bg-white">
           <div class="w-full bg-white px-2 pb-3 pt-14">
             <button onClick={() => handleExit()}>
@@ -91,7 +90,6 @@ const Multiple: Component = () => {
           완료
         </Button>
       </div>
-    </ContentLayout>
   );
 };
 
