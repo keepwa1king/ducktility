@@ -69,7 +69,7 @@ const Multiple: Component = () => {
           </div>
           <div class={allItemsFilled() ? "h-1 w-full bg-black" : "h-1 w-1/2 bg-black"}></div>
         </div>
-        <div class="flex flex-col justify-center px-5 py-7">
+        <div class="flex flex-col justify-center px-5 py-7 w-full">
           <div class="flex flex-col items-center">
             <MultipleForm />
             {state.users.length < 7 && state.questions.every((q) => q !== "") && (

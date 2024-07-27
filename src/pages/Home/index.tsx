@@ -28,7 +28,7 @@ const Home: Component = () => {
         <div class="flex w-full flex-row items-center justify-center">
           <_NavBtn
             title="취향표 - 개인용"
-            description="혼자만의 취향표를\n만들어서 공유해요"
+            description="나만의 취향표를 제작하고\n저장할 수 있어요!"
             imgSrc={person}
             route="/collage/type/single"
             onClick={() => {
@@ -47,7 +47,7 @@ const Home: Component = () => {
           <div class="size-4"></div>
           <_NavBtn
             title="취향표 - 다인용"
-            description="사람들과 함께 취향표를\n만들어서 공유해요"
+            description="친구들과 함께 취향표를\n제작할 수 있어요!"
             imgSrc={people}
             route="/collage/type/multiple"
             onClick={() => {
@@ -71,7 +71,7 @@ const Home: Component = () => {
         </div>
         <div class="size-12"></div>
         <Typography variant="caption2" textColor="text-grey-600">
-          <a href="https://forms.gle/1sr9gBPbDn9QFcw48">건의사항이 있다면 알려주세요!</a>
+          <a href="https://forms.gle/1sr9gBPbDn9QFcw48">건의사항은 여기로!</a>
         </Typography>
         <div class="size-4"></div>
         <Typography variant="caption1" textColor="text-grey-600">

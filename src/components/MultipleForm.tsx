@@ -13,6 +13,8 @@ export default function MultipleForm() {
     setState("questions", updatedQuestions);
   };
 
+  const exampleTexts = ["최애", "차애", "친구", "애인", "결혼", "이혼", "성격", "육아", "이상형"];
+
   return (
     <div class="flex w-full flex-col gap-4">
       <Typography variant="title" textColor="text-grey-800">
@@ -22,7 +24,7 @@ export default function MultipleForm() {
       <div class="grid w-full grid-cols-2 gap-1">
         <For each={state.questions}>
           {(question, index) => (
-            <TextInput index={index()} value={question} onChange={(value) => updateQuestion(index(), value)} />
+            <TextInput index={index()} value={question} onChange={(value) => updateQuestion(index(), value)} exampleText={exampleTexts[index()]} />
           )}
         </For>
       </div>

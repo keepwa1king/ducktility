@@ -6,6 +6,7 @@ interface TextInputProps {
   index: number;
   value: string;
   onChange: (value: string) => void;
+  exampleText: string;
 }
 
 export default function TextInput(props: TextInputProps) {
@@ -49,7 +50,7 @@ export default function TextInput(props: TextInputProps) {
   };
 
   return (
-    <div class="flex flex-row items-center rounded-[4px] bg-grey-50 px-3 py-[6px]">
+    <div class="w-full flex flex-row justify-between items-center rounded-[4px] bg-grey-50 px-3 py-[6px]">
       <input
         size={15}
         type="text"
@@ -58,7 +59,7 @@ export default function TextInput(props: TextInputProps) {
         onInput={handleInput}
         onBlur={handleBlur}
         onCompositionEnd={handleCompositionEnd}
-        placeholder={`${props.index + 1}번째 문항 ex) 최애`}
+        placeholder={`${props.index + 1}번째 문항 ex) ${props.exampleText}`}
         name={`question-${props.index}`}
         id={`question-${props.index}`}
         aria-label={`${props.index + 1}번째 문항`}

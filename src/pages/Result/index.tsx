@@ -7,6 +7,9 @@ import html2canvas from "html2canvas";
 
 import exit from "../../assets/exit.svg";
 import { setAnswers, setItems } from "../../store";
+import logo from "../../assets/logo.png";
+
+
 
 const Result: Component = () => {
   const location = useLocation();
@@ -39,7 +42,7 @@ const Result: Component = () => {
   };
 
   onMount(() => {
-    const images = document.querySelectorAll("#result-card img") as NodeListOf<HTMLImageElement>;
+    const images = document.querySelectorAll("#result-img img") as NodeListOf<HTMLImageElement>;
     images.forEach((img) => {
       if (img.complete) {
         adjustImageForCanvas(img);
@@ -54,7 +57,7 @@ const Result: Component = () => {
     if (element) {
       html2canvas(element, {
         onclone: (document) => {
-          const images = document.querySelectorAll("#result-card img") as NodeListOf<HTMLImageElement>;
+          const images = document.querySelectorAll("#result-img img") as NodeListOf<HTMLImageElement>;
           images.forEach(adjustImageForCanvas);
         },
         useCORS: true,
@@ -68,6 +71,7 @@ const Result: Component = () => {
       });
     }
   };
+
 
   const handleExit = () => {
     // answers 초기화
@@ -102,13 +106,13 @@ const Result: Component = () => {
           </div>
           <div class="h-1 w-full bg-grey-50"></div>
         </div>
-        <div id="result-card" class="w-full px-5 py-8">
+        <div id="result-card" class="w-full px-5 pt-8 pb-4 flex flex-col">
           <div class="size-7"></div>
           <div class="grid grid-cols-3 gap-4">
             <For each={Object.values(items)}>
               {(item: any) => (
                 <div class="text-center">
-                  <div class="relative aspect-square w-full overflow-hidden rounded">
+                  <div id="result-img" class="relative aspect-square w-full overflow-hidden rounded">
                     <img
                       src={item.artistMember?.profileImage}
                       alt={item.artistMember?.name}
@@ -122,6 +126,8 @@ const Result: Component = () => {
               )}
             </For>
           </div>
+          <div class="size-12"></div>
+          <img src={logo} alt="logo" class="w-1/6" />
         </div>
         <Button variant="point" onClick={handleDownload}>
           다운로드

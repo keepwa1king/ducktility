@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import html2canvas from "html2canvas";
 
 import exit from "../../assets/exit.svg";
+import logo from "../../assets/logo.png";
 import { setAnswers, setItems, setState, state } from "../../store";
 import saveAs from "file-saver";
 
@@ -111,7 +112,7 @@ const MultipleResult: Component = () => {
         wrapText(ctx, question, x, y, questionSize, 18, 3);
       });
 
-      const userImagePromises = [...state.users, ...state.users, ...state.users, ...state.users,  ...state.users, ...state.users, ...state.users].map((user, userIndex) => {
+      const userImagePromises = state.users.map((user, userIndex) => {
         if (!user.profileImage || !user.name) return null;
         return loadImage(user.profileImage).then(userImage => {
           const x = 100;
@@ -146,6 +147,13 @@ const MultipleResult: Component = () => {
       });
 
       await Promise.all(userImagePromises);
+
+      // 로고 추가
+      const logoImage = await loadImage(logo);
+      const logoSize = 100;  // 로고 크기를 조절하세요
+      const logoX = canvas.width - logoSize - 30;  // 오른쪽 여백 10px
+      const logoY = canvas.height - 40;
+      ctx.drawImage(logoImage, logoX, logoY, logoSize, 22.86);
     };
 
     drawStyle();

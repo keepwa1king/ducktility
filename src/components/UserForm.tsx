@@ -59,7 +59,7 @@ export default function UserForm(props: UserFormProps) {
             type="text"
             value={user().name}
             onInput={handleNameChange}
-            placeholder="이름을 입력하세요"
+            placeholder={`${props.userIndex + 1}번째 참여자 이름`}
             class="rounded-[4px] border-transparent bg-grey-50 p-0 text-body1 font-semibold tracking-body1 text-grey-800 placeholder-grey-400 placeholder:text-body1 placeholder:font-normal placeholder:tracking-body1 focus:border-transparent focus:outline-none focus:ring-0"
             maxLength={10}
           />
