@@ -207,7 +207,7 @@ const MultipleResult: Component = () => {
     <div>
         <div class="bg-white flex h-full min-h-screen w-full flex-col items-start justify-start pb-16">
           <div class="flex w-full flex-col bg-white">
-            <div class="flex w-full flex-row items-center justify-between bg-white px-4 pb-5 pt-14 text-center">
+            <div class="flex w-full flex-row items-center justify-between bg-white px-4 pb-5 pt-8 text-center">
               <img src={exit} alt="" class="h-6 w-6 opacity-0" />
               <Typography variant="body4" textColor="text-black">
                 취향표 저장

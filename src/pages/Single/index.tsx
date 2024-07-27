@@ -47,7 +47,7 @@ const Single: Component = () => {
   return (
       <div class="flex h-full min-h-screen bg-white w-full flex-col items-start justify-start pb-16">
         <div class="flex w-full flex-col bg-white">
-          <div class="w-full bg-white px-2 pb-3 pt-14">
+          <div class="w-full bg-white px-2 pb-3 pt-8">
             <button onClick={() => handleExit()}>
               <img src={arrow} alt="back button" class="h-9 w-9" />
             </button>
