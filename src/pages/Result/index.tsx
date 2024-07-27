@@ -1,14 +1,13 @@
 import { Component, For, onMount } from "solid-js";
 import { useLocation, useNavigate } from "@solidjs/router";
 import Typography from "../../components/Typography";
-import ContentLayout from "../../layouts/ContentLayout";
 import Button from "../../components/Button";
 import html2canvas from "html2canvas";
 
 import exit from "../../assets/exit.svg";
 import { setAnswers, setItems } from "../../store";
 import logo from "../../assets/logo.png";
-
+import saveAs from "file-saver";
 
 
 const Result: Component = () => {
@@ -63,11 +62,9 @@ const Result: Component = () => {
         useCORS: true,
         allowTaint: true
       }).then((canvas) => {
-        const dataUrl = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.download = "my-kpop-chart.png";
-        link.href = dataUrl;
-        link.click();
+        canvas.toBlob((blob) => {
+          saveAs(blob as Blob, 'my-type-collage.png')
+        });
       });
     }
   };

@@ -1,13 +1,10 @@
-import { Component, createEffect, For, onMount } from "solid-js";
-import { useLocation, useNavigate } from "@solidjs/router";
+import { Component, onMount } from "solid-js";
+import { useNavigate } from "@solidjs/router";
 import Typography from "../../components/Typography";
-import ContentLayout from "../../layouts/ContentLayout";
 import Button from "../../components/Button";
-import html2canvas from "html2canvas";
-
 import exit from "../../assets/exit.svg";
 import logo from "../../assets/logo.png";
-import { setAnswers, setItems, setState, state } from "../../store";
+import { setState, state } from "../../store";
 import saveAs from "file-saver";
 
 const MultipleResult: Component = () => {
@@ -173,7 +170,7 @@ const MultipleResult: Component = () => {
 
         canvas.toBlob((blob) => {
           if (blob) {
-            saveAs(blob, `k-pop.png`);
+            saveAs(blob, 'my-type-collage.png');
           }
         });
       }
