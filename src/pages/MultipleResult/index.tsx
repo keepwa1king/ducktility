@@ -205,9 +205,9 @@ const MultipleResult: Component = () => {
 
   return (
     <div>
-        <div class="bg-white flex h-full min-h-screen w-full flex-col items-start justify-start pb-16">
+        <div class="bg-white flex min-h-screen w-full flex-col items-start justify-start pb-16">
           <div class="flex w-full flex-col bg-white">
-            <div class="flex w-full flex-row items-center justify-between bg-white px-4 pb-5 pt-8 text-center">
+            <div class="flex w-full flex-row items-center justify-between bg-white px-4 pb-5 pt-5 text-center">
               <img src={exit} alt="" class="h-6 w-6 opacity-0" />
               <Typography variant="body4" textColor="text-black">
                 취향표 저장
@@ -218,7 +218,7 @@ const MultipleResult: Component = () => {
             </div>
             <div class="h-1 w-full bg-grey-50"></div>
           </div>
-          <div class="size-7"></div>
+          <div class="size-4"></div>
           <canvas ref={canvasRef} width={1400} height={1000} class="w-full bg-white" />
         </div>
       <Button variant="point" onClick={saveAsImage}>

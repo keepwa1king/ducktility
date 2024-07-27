@@ -92,9 +92,9 @@ const Result: Component = () => {
   };
 
   return (
-      <div class="bg-white flex h-full min-h-screen w-full flex-col items-start justify-start pb-16">
+      <div class="bg-white flex min-h-screen w-full flex-col items-start justify-start pb-16">
         <div class="flex w-full flex-col bg-white">
-          <div class="flex w-full flex-row items-center justify-between bg-white px-4 pb-5 pt-8 text-center">
+          <div class="flex w-full flex-row items-center justify-between bg-white px-4 pb-5 pt-5 text-center">
             <img src={exit} alt="" class="h-6 w-6 opacity-0" />
             <Typography variant="body4" textColor="text-black">
               취향표 저장
@@ -106,7 +106,6 @@ const Result: Component = () => {
           <div class="h-1 w-full bg-grey-50"></div>
         </div>
         <div id="result-card" class="w-full px-5 pt-8 pb-4 flex flex-col">
-          <div class="size-7"></div>
           <div class="grid grid-cols-3 gap-4">
             <For each={Object.values(items)}>
               {(item: any) => (
