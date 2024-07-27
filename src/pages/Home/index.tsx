@@ -13,8 +13,7 @@ import { setAnswers, setItems, setState } from "../../store";
 
 const Home: Component = () => {
   return (
-    <ContentLayout backgroundColor="bg-white">
-      <div class="flex min-h-screen flex-col items-center justify-end px-5 pb-12">
+      <div class="bg-white flex h-svh flex-col items-center justify-end px-5 pb-12">
         <img src={logo} alt="logo" class="h-[55px]" />
         <div class="size-16"></div>
         <Typography variant="body1" textColor="text-grey-800" class="text-center">
@@ -78,7 +77,6 @@ const Home: Component = () => {
           <a href="https://twitter.com/DevvTyga">@DevvTyga</a>
         </Typography>
       </div>
-    </ContentLayout>
   );
 };
 export default Home;
