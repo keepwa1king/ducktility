@@ -126,7 +126,7 @@ const Result: Component = () => {
 
         canvas.toBlob((blob) => {
           if (blob) {
-            saveAs(blob, 'my-kpop-chart.png');
+            saveAs(blob, 'my-type-collage.png');
           }
         }, 'image/png');
       }
