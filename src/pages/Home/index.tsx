@@ -13,70 +13,67 @@ import { setAnswers, setItems, setState } from "../../store";
 
 const Home: Component = () => {
   return (
-      <div class="bg-white flex h-svh flex-col items-center justify-end px-5 pb-12">
-        <img src={logo} alt="logo" class="h-[55px]" />
-        <div class="size-16"></div>
-        <Typography variant="body1" textColor="text-grey-800" class="text-center">
-          편한 덕질을 위한
-          <br />
-          여러 유틸리티들을
-          <br />
-          제작하고 있습니다.
-        </Typography>
-        <div class="size-16"></div>
-        <div class="flex w-full flex-row items-center justify-center">
-          <_NavBtn
-            title="취향표 - 개인용"
-            description="나만의 취향표를 제작하고\n저장할 수 있어요!"
-            imgSrc={person}
-            route="/collage/type/single"
-            onClick={() => {
-              // answers 초기화
-              setAnswers({});
+    <div class="bg-white flex h-svh flex-col items-center justify-end px-5 pb-12">
+      <img src={logo} alt="logo" class="h-[55px]" />
+      <div class="size-16"></div>
+      <Typography variant="body1" textColor="text-grey-800" class="text-center">
+        편한 덕질을 위한
+        <br />
+        여러 유틸리티들을
+        <br />
+        제작하고 있습니다.
+      </Typography>
+      <div class="size-16"></div>
+      <div class="flex w-full flex-row items-center justify-center">
+        <_NavBtn
+          title="취향표 - 개인용"
+          description="나만의 취향표를 제작하고\n저장할 수 있어요!"
+          imgSrc={person}
+          route="/collage/type/single"
+          onClick={() => {
+            // answers 초기화
+            setAnswers({});
 
-              // items 초기화
-              const initialItems = Object.fromEntries(
-                Array(9)
-                  .fill(0)
-                  .map((_, index) => [index, { title: "", artistMember: null }])
-              );
-              setItems(initialItems);
-            }}
-          />
-          <div class="size-4"></div>
-          <_NavBtn
-            title="취향표 - 다인용"
-            description="친구들과 함께 취향표를\n제작할 수 있어요!"
-            imgSrc={people}
-            route="/collage/type/multiple"
-            onClick={() => {
-              setState({
-                questions: Array(9).fill(""),
-                users: [
-                  {
-                    name: "",
-                    profileImage: null,
-                    answers: Array(9).fill({ profileImage: "" })
-                  },
-                  {
-                    name: "",
-                    profileImage: null,
-                    answers: Array(9).fill({ profileImage: "" })
-                  },
-                ]
-              });
-            }}
-          />
-        </div>
-        <div class="size-12"></div>
-        <Typography variant="caption2" textColor="text-grey-600">
-          <a href="https://forms.gle/1sr9gBPbDn9QFcw48">건의사항은 여기로!</a>
-        </Typography>
+            // items 초기화
+            const initialItems = Object.fromEntries(
+              Array(9)
+                .fill(0)
+                .map((_, index) => [index, { title: "", artistMember: null }])
+            );
+            setItems(initialItems);
+          }}
+        />
         <div class="size-4"></div>
-        <Typography variant="caption1" textColor="text-grey-600">
-          <a href="https://twitter.com/DevvTyga">@DevvTyga</a>
-        </Typography>
+        <_NavBtn
+          title="취향표 - 다인용"
+          description="친구들과 함께 취향표를\n제작할 수 있어요!"
+          imgSrc={people}
+          route="/collage/type/multiple"
+          onClick={() => {
+            setState({
+              questions: Array(9).fill(""),
+              users: [
+                {
+                  name: "",
+                  profileImage: null,
+                  answers: Array(9).fill({ profileImage: "" })
+                },
+                {
+                  name: "",
+                  profileImage: null,
+                  answers: Array(9).fill({ profileImage: "" })
+                },
+              ]
+            });
+          }}
+        />
       </div>
+      <div class="size-12"></div>
+      <Typography variant="caption2" textColor="text-grey-600">
+        <a href="https://forms.gle/1sr9gBPbDn9QFcw48">건의사항은 여기로!</a>
+      </Typography>
+      <div class="size-4"></div>
+    </div>
   );
 };
 export default Home;
